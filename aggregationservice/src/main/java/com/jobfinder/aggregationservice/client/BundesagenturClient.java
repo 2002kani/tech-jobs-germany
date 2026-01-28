@@ -25,6 +25,7 @@ public class BundesagenturClient {
                 .queryParam("angebotsart", 34)
                 .toUriString();
 
+        
     }
 
 }
