@@ -14,5 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 public class JobResponse {
     @JsonProperty("stellenangebote")
-    private List<Job> stellenangebote;
+    private List<Job> jobOffers;
+
+    public List<Job> getJobOffers() {
+        return jobOffers;
+    }
 }

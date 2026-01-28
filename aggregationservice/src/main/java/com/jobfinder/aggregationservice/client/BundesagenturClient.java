@@ -39,7 +39,7 @@ public class BundesagenturClient {
         org.springframework.http.ResponseEntity<JobResponse> response =
                 restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
 
-        return response.getBody().getStellenangebote();
+        return response.getBody().getJobOffers();
     }
 
 }
