@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Job {
+public class BundesagenturJob {
     @JsonProperty("beruf")
     private String profession;
 

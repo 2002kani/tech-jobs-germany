@@ -1,6 +1,6 @@
 package com.jobfinder.aggregationservice.client;
 
-import com.jobfinder.aggregationservice.dto.bundesagentur.Job;
+import com.jobfinder.aggregationservice.dto.bundesagentur.BundesagenturJob;
 
 import com.jobfinder.aggregationservice.dto.bundesagentur.JobResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,7 @@ public class BundesagenturClient {
     @Value("${bundesagentur.api.key}")
     String apiKey;
 
-    public List<Job> getBundesagenturJobs() {
+    public List<BundesagenturJob> getBundesagenturJobs() {
         final RestTemplate restTemplate = new RestTemplate();
 
         String url = UriComponentsBuilder
@@ -39,7 +39,7 @@ public class BundesagenturClient {
         org.springframework.http.ResponseEntity<JobResponse> response =
                 restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
 
-        return response.getBody().getJobOffers();
+        return response.getBody().getBundesagenturJobOffers();
     }
 
 }
