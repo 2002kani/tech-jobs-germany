@@ -4,8 +4,10 @@ import com.jobfinder.aggregationservice.dto.bundesagentur.BundesagenturJob;
 
 import com.jobfinder.aggregationservice.dto.bundesagentur.JobResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,14 +31,14 @@ public class BundesagenturClient {
                 .queryParam("angebotsart", 34)
                 .toUriString();
 
-        org.springframework.http.HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         headers.set("X-API-Key", apiKey);
         headers.set("Accept", "application/json");
 
         // Complete Http Entity (Header + Body)
-        org.springframework.http.HttpEntity<Void> entity = new org.springframework.http.HttpEntity<>(headers);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        org.springframework.http.ResponseEntity<JobResponse> response =
+        ResponseEntity<JobResponse> response =
                 restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
 
         return response.getBody().getBundesagenturJobOffers();
