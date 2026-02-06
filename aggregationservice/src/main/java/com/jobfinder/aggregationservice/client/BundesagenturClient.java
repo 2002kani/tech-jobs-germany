@@ -35,7 +35,7 @@ public class BundesagenturClient {
         headers.set("X-API-Key", apiKey);
         headers.set("Accept", "application/json");
 
-        // Complete Http Entity (Header + Body)
+        // includes complete Http Entity (Header + Body)
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         ResponseEntity<JobResponse> response =
