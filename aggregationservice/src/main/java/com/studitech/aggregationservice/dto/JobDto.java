@@ -19,6 +19,8 @@ public class JobDto {
 
     private String refnr;
 
+    private String extSource;
+
     private JobArea area;
 
     private String company;

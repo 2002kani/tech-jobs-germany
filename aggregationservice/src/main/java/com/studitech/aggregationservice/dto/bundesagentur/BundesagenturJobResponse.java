@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-public class JobResponse {
+public class BundesagenturJobResponse {
     public List<BundesagenturJob> bundesagenturJobOffers;
 }

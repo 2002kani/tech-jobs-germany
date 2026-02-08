@@ -1,7 +1,7 @@
 package com.studitech.aggregationservice.client;
 
 import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJob;
-import com.studitech.aggregationservice.dto.bundesagentur.JobResponse;
+import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJobResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +34,7 @@ public class BundesagenturClient {
         headers.set("X-API-Key", bundesagenturApiKey);
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<JobResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
+        ResponseEntity<BundesagenturJobResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, BundesagenturJobResponse.class);
 
         return response.getBody().getBundesagenturJobOffers();
     }

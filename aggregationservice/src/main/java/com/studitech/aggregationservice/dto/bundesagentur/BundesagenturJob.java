@@ -25,6 +25,9 @@ public class BundesagenturJob {
 
     private String refnr;
 
+    @Builder.Default
+    private String extSource = "bundesagentur";
+
     @JsonProperty("arbeitsort")
     private JobArea area;
 
