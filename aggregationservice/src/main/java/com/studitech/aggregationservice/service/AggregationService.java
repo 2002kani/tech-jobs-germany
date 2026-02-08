@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,5 +24,7 @@ public class AggregationService implements IAggregationService {
         List<JobDto> jobs = bundesagenturJobs.stream()
                 .map(bundesagenturMapper::map)
                 .toList();
+
+        // TODO: Create JobServiceClient to send normalized jobs to the service
     }
 }
