@@ -1,6 +1,5 @@
 package com.studitech.aggregationservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class JobDto {
     private String profession;
 
     private String title;
