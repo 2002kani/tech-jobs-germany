@@ -1,4 +1,4 @@
-package com.jobfinder.aggregationservice;
+package com.studitech.aggregationservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,8 @@
-package com.jobfinder.aggregationservice.dto.job;
+package com.studitech.aggregationservice.dto.bundesagentur;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jobfinder.aggregationservice.dto.bundesagentur.JobArea;
+import com.studitech.aggregationservice.dto.JobArea;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +11,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Builder
+@NoArgsConstructor
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class Job {
+@Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BundesagenturJob {
     @JsonProperty("beruf")
     private String profession;
 

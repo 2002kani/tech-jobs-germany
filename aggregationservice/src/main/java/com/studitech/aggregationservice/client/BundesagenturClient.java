@@ -1,8 +1,7 @@
-package com.jobfinder.aggregationservice.client;
+package com.studitech.aggregationservice.client;
 
-import com.jobfinder.aggregationservice.dto.bundesagentur.BundesagenturJob;
-
-import com.jobfinder.aggregationservice.dto.bundesagentur.JobResponse;
+import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJob;
+import com.studitech.aggregationservice.dto.bundesagentur.JobResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,33 +16,26 @@ import java.util.List;
 @Service
 public class BundesagenturClient {
     @Value("${bundesagentur.api.url}")
-    String apiUrl;
+    private String bundesagenturApiUrl;
 
     @Value("${bundesagentur.api.key}")
-    String apiKey;
+    private String bundesagenturApiKey;
 
-    public List<BundesagenturJob> getBundesagenturJobs() {
+    public List<BundesagenturJob> getBundesagenturJobs(){
         final RestTemplate restTemplate = new RestTemplate();
 
         String url = UriComponentsBuilder
-                .fromUriString(apiUrl)
+                .fromUriString(bundesagenturApiUrl)
                 .queryParam("was", "software")
-                .queryParam("angebotsart", 34)
-                .toUriString();
+                .queryParam("angebotsart", "34")
+                .build().toUriString();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("X-API-Key", apiKey);
-        headers.set("Accept", "application/json");
-
-        // includes complete Http Entity (Header + Body)
+        headers.set("X-API-Key", bundesagenturApiKey);
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<JobResponse> response =
-                restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
+        ResponseEntity<JobResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, JobResponse.class);
 
         return response.getBody().getBundesagenturJobOffers();
     }
-
 }
-
-
