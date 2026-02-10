@@ -19,7 +19,7 @@ public class AggregationService implements IAggregationService {
     private final BundesagenturMapper bundesagenturMapper;
     private final JobServiceClient jobServiceClient;
 
-    //@Scheduled(cron = "0 0 */6 * * *") // Every 6 hours
+    // @Scheduled(cron = "0 0 */6 * * *") // Every 6 hours
     // @Scheduled(cron = "*/10 * * * * *") // TEST for log
     public void aggregateJobs(){
         List<BundesagenturJob> bundesagenturJobs = bundesagenturClient.getBundesagenturJobs();
