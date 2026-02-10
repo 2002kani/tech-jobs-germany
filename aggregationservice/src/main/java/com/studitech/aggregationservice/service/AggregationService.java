@@ -1,6 +1,7 @@
 package com.studitech.aggregationservice.service;
 
 import com.studitech.aggregationservice.client.BundesagenturClient;
+import com.studitech.aggregationservice.client.JobServiceClient;
 import com.studitech.aggregationservice.dto.JobDto;
 import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJob;
 import com.studitech.aggregationservice.mapper.BundesagenturMapper;
@@ -16,8 +17,10 @@ import java.util.List;
 public class AggregationService implements IAggregationService {
     private final BundesagenturClient bundesagenturClient;
     private final BundesagenturMapper bundesagenturMapper;
+    private final JobServiceClient jobServiceClient;
 
-    @Scheduled(cron = "0 0 */6 * * *") // Every 6 hours
+    //@Scheduled(cron = "0 0 */6 * * *") // Every 6 hours
+    // @Scheduled(cron = "*/10 * * * * *") // TEST for log
     public void aggregateJobs(){
         List<BundesagenturJob> bundesagenturJobs = bundesagenturClient.getBundesagenturJobs();
 
@@ -25,6 +28,6 @@ public class AggregationService implements IAggregationService {
                 .map(bundesagenturMapper::map)
                 .toList();
 
-        // TODO: Create JobServiceClient to send normalized jobs to the service
+        jobServiceClient.sendJobs(jobs);
     }
 }

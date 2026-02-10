@@ -2,6 +2,7 @@ package com.studitech.aggregationservice.client;
 
 import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJob;
 import com.studitech.aggregationservice.dto.bundesagentur.BundesagenturJobResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class BundesagenturClient {
     @Value("${bundesagentur.api.url}")
@@ -36,6 +38,7 @@ public class BundesagenturClient {
 
         ResponseEntity<BundesagenturJobResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, BundesagenturJobResponse.class);
 
+        log.info("BundesagenturJobs response: {}", response.getBody().getBundesagenturJobOffers());
         return response.getBody().getBundesagenturJobOffers();
     }
 }
