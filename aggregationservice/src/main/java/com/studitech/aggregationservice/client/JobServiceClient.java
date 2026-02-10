@@ -7,5 +7,7 @@ import org.springframework.web.client.RestTemplate;
 public class JobServiceClient {
     RestTemplate restTemplate = new RestTemplate();
 
-    public List<>
+    public void sendjobs(){
+        // TODO: continue
+    }
 }
