@@ -29,7 +29,7 @@ public class BundesagenturJob {
     private String extSource = "bundesagentur";
 
     @JsonProperty("arbeitsort")
-    private JobArea area;
+    private BundesagenturJobArea area;
 
     @JsonProperty("arbeitgeber")
     private String company;
