@@ -1,5 +1,6 @@
 package com.studitech.aggregationservice.dto.bundesagentur;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,5 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class BundesagenturJobResponse {
+    @JsonProperty("stellenangebote")
     public List<BundesagenturJob> bundesagenturJobOffers;
 }

@@ -17,15 +17,21 @@ import java.util.List;
 @Slf4j
 @Service
 public class BundesagenturClient {
-    @Value("${bundesagentur.api.url}")
-    private String bundesagenturApiUrl;
+    private final RestTemplate restTemplate;
+    private final String bundesagenturApiUrl;
+    private final String bundesagenturApiKey;
 
-    @Value("${bundesagentur.api.key}")
-    private String bundesagenturApiKey;
+    public BundesagenturClient(
+            RestTemplate restTemplate,
+            @Value("${bundesagentur.api.url}")  String bundesagenturApiUrl,
+            @Value("${bundesagentur.api.key}") String bundesagenturApiKey
+    ){
+        this.restTemplate = restTemplate;
+        this.bundesagenturApiUrl = bundesagenturApiUrl;
+        this.bundesagenturApiKey = bundesagenturApiKey;
+    }
 
     public List<BundesagenturJob> getBundesagenturJobs(){
-        final RestTemplate restTemplate = new RestTemplate();
-
         String url = UriComponentsBuilder
                 .fromUriString(bundesagenturApiUrl)
                 .queryParam("was", "software")

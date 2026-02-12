@@ -10,16 +10,16 @@ import java.util.List;
 
 @Service
 public class JobServiceClient {
-    private final String jobserviceUrl;
+    private final String jobServiceUrl;
     private final RestTemplate restTemplate;
 
     @Autowired
-    public JobServiceClient(RestTemplate restTemplate, @Value("${jobservice.url}") String jobserviceUrl) {
+    public JobServiceClient(RestTemplate restTemplate, @Value("${job.service.url}") String jobServiceUrl) {
         this.restTemplate = restTemplate;
-        this.jobserviceUrl = jobserviceUrl;
+        this.jobServiceUrl = jobServiceUrl;
     }
 
     public void sendJobs(List<JobDto> jobs) {
-        restTemplate.postForEntity(jobserviceUrl, jobs, Void.class);
+        restTemplate.postForEntity(jobServiceUrl, jobs, Void.class);
     }
 }
