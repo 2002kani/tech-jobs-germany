@@ -14,6 +14,7 @@ public class JobController {
 
     @PostMapping("/bulk")
     public ResponseEntity<Void> ingestAggregatedJobs(){
-
+        // read todo list
+        return ResponseEntity.ok().build();
     }
 }
