@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/jobs")
-@Slf4j
 public class JobController {
 
     @PostMapping("/bulk")
