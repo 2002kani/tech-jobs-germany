@@ -1,8 +1,10 @@
 package com.studitech.jobservice.dto;
 
+import lombok.Builder;
 
+@Builder
 public record BulkIngestResponse(
-   Long received,
-   Long created,
-   Long skipped
+   long received,
+   long created,
+   long skipped
 ) {}
