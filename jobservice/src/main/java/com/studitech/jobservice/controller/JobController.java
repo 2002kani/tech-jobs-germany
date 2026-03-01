@@ -1,5 +1,6 @@
 package com.studitech.jobservice.controller;
 
+import com.studitech.jobservice.dto.BulkIngestResponse;
 import com.studitech.jobservice.dto.JobDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +19,8 @@ import java.util.List;
 public class JobController {
 
     @PostMapping("/bulk")
-    public ResponseEntity<Void> ingestAggregatedJobs(@RequestBody List<JobDto> jobs){
-        // read todo list
+    public ResponseEntity<BulkIngestResponse> ingestAggregatedJobs(@RequestBody List<JobDto> jobs){
+
         return ResponseEntity.ok().build();
     }
 }
