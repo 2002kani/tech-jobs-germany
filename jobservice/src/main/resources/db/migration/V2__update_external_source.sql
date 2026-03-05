@@ -1,0 +1,2 @@
+ALTER TABLE job
+ALTER COLUMN external_source DROP NOT NULL;

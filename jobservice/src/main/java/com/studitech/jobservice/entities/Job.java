@@ -27,7 +27,7 @@ public class Job {
     @Column(name = "ref_nr", unique = true, nullable = false)
     private String refnr;
 
-    @Column(name = "external_source", nullable = false)
+    @Column(name = "external_source")
     private String extSource;
 
     @Embedded
