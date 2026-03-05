@@ -44,7 +44,9 @@ public class BundesagenturClient {
 
         ResponseEntity<BundesagenturJobResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, BundesagenturJobResponse.class);
 
-        log.info("BundesagenturJobs response: {}", response.getBody().getBundesagenturJobOffers());
+        if(response != null && response.getBody() != null) {
+            log.info("BundesagenturJobs response: {}", response.getBody().getBundesagenturJobOffers());
+        }
         return response.getBody().getBundesagenturJobOffers();
     }
 }
