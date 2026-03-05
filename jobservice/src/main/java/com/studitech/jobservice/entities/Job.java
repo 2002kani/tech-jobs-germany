@@ -24,13 +24,19 @@ public class Job {
 
     private String title;
 
-    @Column(name = "ref_nr", unique = true)
+    @Column(name = "ref_nr", unique = true, nullable = false)
     private String refnr;
 
-    @Column(name = "external_source")
+    @Column(name = "external_source", nullable = false)
     private String extSource;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "postalcode", column = @Column(name = "area_postal_code")),
+            @AttributeOverride(name = "city",       column = @Column(name = "area_city")),
+            @AttributeOverride(name = "street",     column = @Column(name = "area_street")),
+            @AttributeOverride(name = "region",     column = @Column(name = "area_region"))
+    })
     private EmbeddedArea area;
 
     private String company;

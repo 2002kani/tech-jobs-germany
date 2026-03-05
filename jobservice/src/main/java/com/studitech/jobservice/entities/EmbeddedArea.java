@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Embeddable
 public class EmbeddedArea {
-    @Column(name = "postal_code")
+    @Column(name = "postalcode")
     private String postalcode;
 
     private String city;
