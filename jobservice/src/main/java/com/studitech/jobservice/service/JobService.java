@@ -6,15 +6,19 @@ import com.studitech.jobservice.entities.EmbeddedArea;
 import com.studitech.jobservice.entities.Job;
 import com.studitech.jobservice.repository.JobRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class JobService implements IJobService {
     private final JobRepository jobRepository;
+    private final KafkaTemplate<String, JobDto> kafkaTemplate;
 
     @Override
     public BulkIngestResponse ingestJobs(List<JobDto> dtoJobs) {
@@ -29,10 +33,10 @@ public class JobService implements IJobService {
                 skipped++;
                 continue; // ends loop and skips to the next job
             }
-            Job entity = toEntity(job);
-            jobsToCreate.add(entity);
+            jobsToCreate.add(toEntity(job));
+            kafkaTemplate.send("job.created", job);
+            log.info("Job created for kafka: {}", job);
         }
-
         jobRepository.saveAll(jobsToCreate);
         created = jobsToCreate.size();
 
