@@ -1,15 +1,19 @@
-package com.studitech.notificationservice.dto;
+package com.studitech.notificationservice.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class JobArea {
+@AllArgsConstructor
+@Data
+@Builder
+@Embeddable
+public class EmbeddedArea {
+    @Column(name = "postalcode")
     private String postalcode;
 
     private String city;
