@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS job;
+
+CREATE TABLE seen_job (
+    ref_nr VARCHAR(255) PRIMARY KEY
+)

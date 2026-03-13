@@ -2,9 +2,8 @@ package com.studitech.jobservice.service;
 
 import com.studitech.jobservice.dto.BulkIngestResponse;
 import com.studitech.jobservice.dto.JobDto;
-import com.studitech.jobservice.entities.EmbeddedArea;
-import com.studitech.jobservice.entities.Job;
-import com.studitech.jobservice.repository.JobRepository;
+import com.studitech.jobservice.entities.SeenJob;
+import com.studitech.jobservice.repository.SeenJobRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,28 +16,28 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class JobService implements IJobService {
-    private final JobRepository jobRepository;
+    private final SeenJobRepository seenJobRepository;
     private final KafkaTemplate<String, JobDto> kafkaTemplate;
 
     @Override
     public BulkIngestResponse ingestJobs(List<JobDto> dtoJobs) {
-        List<Job> jobsToCreate = new ArrayList<>();
+        List<SeenJob> seenJobs = new ArrayList<>();
         int received = dtoJobs.size();
         int created = 0;
         int skipped = 0;
 
         // Iterate through jobDtos and add them into entity list
         for(JobDto job : dtoJobs) {
-            if(jobRepository.existsByRefnr(job.getRefnr())) {
+            if(seenJobRepository.existsByRefnr(job.getRefnr())) {
                 skipped++;
                 continue; // ends loop and skips to the next job
             }
-            jobsToCreate.add(toEntity(job));
+            seenJobs.add(toSeenjobs(job));
             kafkaTemplate.send("job.created", job);
             log.info("Job created for kafka: {}", job);
         }
-        jobRepository.saveAll(jobsToCreate);
-        created = jobsToCreate.size();
+        seenJobRepository.saveAll(seenJobs);
+        created = seenJobs.size();
 
         return BulkIngestResponse.builder()
                 .received(received)
@@ -47,23 +46,9 @@ public class JobService implements IJobService {
                 .build();
     }
 
-    private Job toEntity(JobDto dto) {
-        EmbeddedArea area = EmbeddedArea.builder()
-                .postalcode(dto.getArea().getPostalcode())
-                .city(dto.getArea().getCity())
-                .street(dto.getArea().getStreet())
-                .region(dto.getArea().getRegion())
-                .build();
-
-        return Job.builder()
-                .profession(dto.getProfession())
-                .title(dto.getTitle())
-                .refnr(dto.getRefnr())
-                .extSource(dto.getExtSource())
-                .area(area)
-                .company(dto.getCompany())
-                .publishDate(dto.getPublishDate())
-                .modificationDate(dto.getModificationDate())
+    private SeenJob toSeenjobs(JobDto job) {
+        return SeenJob.builder()
+                .refnr(job.getRefnr())
                 .build();
     }
 }
