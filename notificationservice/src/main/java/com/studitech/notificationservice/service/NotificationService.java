@@ -19,7 +19,7 @@ public class NotificationService implements INotificationService {
     private final NotificationRepository notificationRepository;
     private final EmailService emailService;
 
-    @KafkaListener(topics = "jobs.created")
+    @KafkaListener(topics = "job.created")
     @Override
     public void notifyJobs(JobDto job) {
         log.info("Job received: {}", job);
@@ -47,6 +47,8 @@ public class NotificationService implements INotificationService {
                 .profession(job.getProfession())
                 .title(job.getTitle())
                 .area(area)
+                .refnr(job.getRefnr())
+                .extSource(job.getExtSource())
                 .company(job.getCompany())
                 .publishDate(job.getPublishDate())
                 .modificationDate(job.getModificationDate())

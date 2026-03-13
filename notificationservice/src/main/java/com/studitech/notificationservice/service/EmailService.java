@@ -18,6 +18,5 @@ public class EmailService implements IEmailService {
         List<Notification> notifications = notificationRepository.findByEmailSent(false);
 
 
-
     }
 }
