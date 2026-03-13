@@ -17,8 +17,7 @@ public class EmailService implements IEmailService {
     public void sendNewJobsEmail() {
         List<Notification> notifications = notificationRepository.findByEmailSent(false);
 
-        if(notifications.isEmpty()){
 
-        }
+
     }
 }
